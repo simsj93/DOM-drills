@@ -1,9 +1,13 @@
+
+// everything is a function of this event listener that ensures the DOM content is loaded first. 
 document.addEventListener("DOMContentLoaded", function () {
     let element1 = document.createElement('div');
     element1.className = "header-container";
 
+// establishing that the div (with above features) is in the body.
     document.body.appendChild(element1);
 
+// headers with content 
     let header = document.createElement('h1');
     header.className = "h1";
     let headerText = document.createTextNode('This is an h1');
@@ -40,25 +44,46 @@ document.addEventListener("DOMContentLoaded", function () {
     header6.appendChild(header6Text);
     element1.appendChild(header6);
 
+    const colorArray = ['red', 'pink', 'orange', 'yellow', 'green', 'purple', 'blue', 'gray'];
 
-
+// listens for a double click and shifts h1's color randomly.
     header.addEventListener("dblclick", function () {
-        const colorArray = ['red', 'pink', 'orange', 'yellow', 'green', 'purple', 'black', 'gray'];
         header.style.color =
             colorArray[Math.floor(Math.random() * colorArray.length)];
 
     });
 
+// button that produces list items.
     let button = document.createElement('button');
     let bttnText = document.createTextNode('Click to add new list item');
-    button.className= "button"; 
-    button.appendChild(bttnText); 
-    document.body.appendChild(button); 
+    button.className = "button";
+    button.appendChild(bttnText);
+    document.body.appendChild(button);
+
+// listens for button click and produces said list items.
+    var i = 1;
+    button.addEventListener('click', function () {
+
+        let li = document.createElement('li');
+        let liText = document.createTextNode('This is list item ' + i);
+        li.appendChild(liText);
+        document.body.appendChild(li);
+        i++;
+
+// listens for click on list items themselves and randomizes colors.
+        li.addEventListener('click', function () {
+            li.style.color = 
+                colorArray[Math.floor(Math.random() * colorArray.length)];
+
+// listens for double click on list items and removes list item. 
+        li.addEventListener("dblclick", function() {
+            li.remove()
+
+        })
+    });
+        
     
-    button.addEventListener('click', function() {
-        
-        
+    });
 
-    })
 
-})
+});
